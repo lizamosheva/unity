@@ -1,24 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
+    public int minutes;
+    public float seconds;
+    public TextMeshProUGUI timerText;
 
-    public int minutes = 4;
-    public float seconds = 60;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    // Р¦РёРєР» РѕР±РЅРѕРІР»РµРЅРёСЏ СЃРѕСЃС‚Р°РІР»СЏРµС‚ РїСЂРёРјРµСЂРЅРѕ 0.01 СЃРµРєСѓРЅРґС‹
     void Update()
     {
         seconds -= Time.deltaTime;
-
         if (seconds <= 0)
         {
             if (minutes > 0)
@@ -29,11 +24,13 @@ public class Timer : MonoBehaviour
             }
             else
             {
-                // Если таймер остановился, перезагружаем текущую сцену
+                // Р•СЃР»Рё С‚Р°Р№РјРµСЂ РѕСЃС‚Р°РЅРѕРІРёР»СЃСЏ, РїРµСЂРµР·Р°РіСЂСѓР¶Р°РµРј С‚РµРєСѓС‰СѓСЋ СЃС†РµРЅСѓ
                 int sceneIndex = SceneManager.GetActiveScene().buildIndex;
                 SceneManager.LoadScene(sceneIndex);
             }
         }
-    }
 
+
+        timerText.text = minutes.ToString() + ":" + Mathf.RoundToInt(seconds).ToString();
+    }
 }
